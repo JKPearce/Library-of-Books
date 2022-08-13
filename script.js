@@ -1,8 +1,9 @@
-let myLibrary = [];
 const cardWrapper = document.getElementById("card-wrapper");
 const openModalButtons = document.querySelectorAll('[data-modal-target]');
 const closeModalButtons = document.querySelectorAll('[data-close-button]');
+const addBookForm = document.getElementById('add-book-form');
 const overlay = document.getElementById('overlay');
+let myLibrary = [];
 
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {

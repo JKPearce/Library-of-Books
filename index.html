@@ -17,7 +17,14 @@
                 <button data-close-button class="close-button">&times;</button>
             </div>
             <div class="modal-body">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus corrupti eaque consequuntur in quasi at corporis consequatur possimus error architecto quaerat excepturi neque quo, dolor provident repudiandae ducimus, quisquam nemo officia harum. Aliquam quam quod deleniti dolore, atque itaque totam ullam officia eveniet quidem molestias voluptas iste reiciendis id, voluptatem accusamus necessitatibus. Minima harum voluptas laboriosam neque. Quod earum natus veniam repellendus deleniti ratione harum incidunt, laboriosam atque laborum libero similique eius maxime pariatur eligendi praesentium, possimus enim asperiores dicta!
+                <form class="add-book-form" id="add-book-form">
+                    <input type="text" name="title" id="form-book-title" placeholder="Title" required maxlength="100">
+                    <input type="text" name="author" id="form-book-author" placeholder="Author" required maxlength="100">
+                    <input type="number" name="pages" id="form-book-pages" placeholder="Pages" required max="100000">
+                    <label for="isRead">Have you read it?</label>
+                    <input type="checkbox" name="isRead" id="isRead">
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </div>
         <div id="overlay"></div>
