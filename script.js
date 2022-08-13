@@ -79,16 +79,32 @@ function addBookToLibrary(book){
     myLibrary.push(book);
 }
 
+function clearBookDisplay(){
+    cardWrapper.innerHTML = '';
+}
+
 function displayBooks(){
+    clearBookDisplay();
     myLibrary.forEach((book, i) => {
         const card = document.createElement('div');
+        const title = document.createElement('h1');
+        const author = document.createElement('h2');
+        const pages = document.createElement('h3');
+        const read = document.createElement('p');
+        const readBtn = document.createElement('button');
+
         card.classList.add('card');
+        title.innerText = book.title;
+        author.innerText = book.author;
+        pages.innerText = book.page;
+        book.read ? read.innerHTML = "Read" :read.innerHTML = "Not read"
+        readBtn.innerText = "Toggle read";
 
-        const bookDetails = document.createElement('div');
-        bookDetails.classList.add('book-details');
-        bookDetails.innerHTML = `${book.title}<br /> ${book.author}<br />${book.page}<br /> ${book.read} <button data-book-number=${i}>I have Read</button>`;
-
-        card.appendChild(bookDetails);
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(pages);
+        card.appendChild(read);
+        card.appendChild(readBtn);
         cardWrapper.appendChild(card);
-    })
+    });
 }
