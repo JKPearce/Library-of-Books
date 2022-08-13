@@ -1,3 +1,21 @@
+class Book {
+    constructor(title, author, page, read) {
+        this.title = title;
+        this.author = author;
+        this.page = page;
+        this.read = read;
+    }
+
+    info() {
+        return `${this.title} by ${this.author}, ${this.page}, ${this.read}`;
+    }
+
+    toggleRead(){
+        this.read = !this.read; //Will save it to what its not
+    }
+}
+
+
 const cardWrapper = document.getElementById("card-wrapper");
 const openModalButtons = document.querySelectorAll('[data-modal-target]');
 const closeModalButtons = document.querySelectorAll('[data-close-button]');
@@ -7,7 +25,7 @@ let myLibrary = [];
 
 addBookForm.onsubmit = addBookToLibrary;
 
-const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", "295 pages", "not read yet");
+const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", "295 pages", false);
 
 myLibrary.push(theHobbit);
 
@@ -55,17 +73,6 @@ function closeModal(modal){
     overlay.classList.remove('active');
 }
 
-function Book(title, author, page, read){
-    this.title = title;
-    this.author = author;
-    this.page = page;
-    this.read = read;
-}
-
-Book.prototype.info = function(){
-    return `${this.title} by ${this.author}, ${this.page}, ${this.read}`;
-}
-
 function addBookToLibrary(e){
     e.preventDefault();
     const newBook = getBookFromInput();
@@ -91,13 +98,13 @@ function displayBooks(){
         const removeBtn = document.createElement('button');
 
         card.classList.add('card');
-        card.dataset.bookId = i;
         title.innerText = book.title;
         author.innerText = book.author;
         pages.innerText = book.page;
-        book.read ? read.innerHTML = "Read" :read.innerHTML = "Not read"
+        book.read ? read.innerHTML = "Read" : read.innerHTML = "Not read"
         readBtn.innerText = "Toggle read";
         readBtn.classList.add("read-btn");
+        readBtn.dataset.bookId = i;
         removeBtn.innerText = "Remove Book";
         removeBtn.classList.add('remove-btn');
         removeBtn.dataset.bookId = i;
@@ -118,5 +125,8 @@ cardWrapper.addEventListener('click', (e) => {
         myLibrary.splice(e.target.dataset.bookId, 1);
         displayBooks();
     }
-    //TODO: Toggle Read
+    if(e.target.classList.contains('read-btn')){
+        myLibrary[e.target.dataset.bookId].toggleRead();
+        displayBooks();
+    }
 })
