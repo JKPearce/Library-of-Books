@@ -5,6 +5,31 @@ const addBookForm = document.getElementById('add-book-form');
 const overlay = document.getElementById('overlay');
 let myLibrary = [];
 
+addBookForm.onsubmit = addBook;
+
+const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", "295 pages", "not read yet");
+
+addBookToLibrary(theHobbit);
+
+displayBooks();
+
+function addBook(e){
+    e.preventDefault();
+    const newBook = getBookFromInput();
+
+    myLibrary.push(newBook);
+    closeModal(addBookForm.closest('.modal'));
+    displayBooks();
+}
+
+const getBookFromInput = () => {
+    const title = document.getElementById('form-book-title').value;
+    const author = document.getElementById('form-book-author').value;
+    const pages = document.getElementById('form-book-pages').value;
+    const isRead = document.getElementById('isRead').checked;
+    return new Book(title, author, pages, isRead);
+}
+
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget);
@@ -28,6 +53,7 @@ overlay.addEventListener('click', () => {
 
 function openModal(modal){
     if(modal == null) return;
+    addBookForm.reset();
     modal.classList.add('active');
     overlay.classList.add('active');
 }
@@ -66,10 +92,3 @@ function displayBooks(){
         cardWrapper.appendChild(card);
     })
 }
-
-const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", "295 pages", "not read yet");
-
-
-addBookToLibrary(theHobbit);
-
-displayBooks();
